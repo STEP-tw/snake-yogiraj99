@@ -1,0 +1,26 @@
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+#grid {
+  border-collapse: collapse;
+}
+
+#grid td {
+  width: 8px;
+  height: 8px;
+}
+
+.snake {
+  background-color: black;
+}
+
+.snake_head {
+  background-color: red;
+}
+
+.food {
+  background-color: blue;
+  border-radius: 50%;
+}
