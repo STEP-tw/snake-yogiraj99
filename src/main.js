@@ -42,17 +42,16 @@ const isHitBorder = function (x_coord,y_coord) {
 }
 
 const isCollidedHorizontally = function (x_coord) {
-  return x_coord>numberOfCols||x_coord<0;
+  return x_coord>=numberOfCols||x_coord<=0;
 }
 
 const isCollidedVertically = function (y_coord) {
-  return y_coord>numberOfRows||y_coord<0;
+  return y_coord>=numberOfRows||y_coord<=0;
 }
 
 const actionsAfterGameOver = function () {
   let grid=document.getElementById("keys");
   grid.onkeyup=null;
-  eraseGrids();
   clearInterval(animator);
   displayGameOver();
   giveChanceToRestart();
@@ -68,15 +67,22 @@ const displayGameOver = function () {
   message_box.innerText="Game Over";
 };
 
-const displayGameIsGoingOn = function () {
+const eraseGameOverMessage = function () {
   let message_box=document.getElementById("message_box");
-  message_box.innerText="Game is Going on";
+  message_box.innerText="";
 }
 
 const giveChanceToRestart = function () {
   let restart=document.getElementById("restart_game");
-  restart.onclick=startGame;
+  restart.onclick=restartGame;
   restart.style.visibility="visible";
+}
+
+const restartGame = function () {
+  eraseGrids();
+  hideRestartButton();
+  eraseGameOverMessage();
+  startGame();
 }
 
 const changeSnakeDirection=function(event) {
@@ -127,8 +133,6 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  displayGameIsGoingOn();
-  hideRestartButton();
   animator=setInterval(animateSnake,140);
 }
 
