@@ -17,34 +17,41 @@ const animateSnake=function() {
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
-  if (isGameOver(snake.getHead())) {
+  if (isGameOver(snake)) {
     actionsAfterGameOver();
   }
 }
 
-const isGameOver = function (snake_head) {
-  let snake_head_x_coord=snake_head.getCoord()[0]
-  let snake_head_y_coord=snake_head.getCoord()[1]
-  return isHittingBorder(snake_head_x_coord,snake_head_y_coord);
+const isGameOver = function (snake) {
+  let snake_head=snake.getHead();
+  let head_x_coord=snake_head.getCoord()[0]
+  let head_y_coord=snake_head.getCoord()[1]
+  return isHitBorder(head_x_coord,head_y_coord)||isEatingEatself(snake);
 }
 
-const isHittingBorder = function (x_coord,y_coord) {
-  return isCollidingHorizontally(x_coord)||isCollidingVertically(y_coord);
+const isEatingEatself = function (snake) {
+  let snake_body=snake.getBody();
+  let snake_head=snake.getHead()
+  return snake_body.some((body_cell)=>{
+    return body_cell.isSameCoordAs(snake_head)
+  });
 }
 
-const isCollidingHorizontally = function (x_coord) {
+const isHitBorder = function (x_coord,y_coord) {
+  return isCollidedHorizontally(x_coord)||isCollidedVertically(y_coord);
+}
+
+const isCollidedHorizontally = function (x_coord) {
   return x_coord>numberOfCols||x_coord<0;
 }
 
-const isCollidingVertically = function (y_coord) {
+const isCollidedVertically = function (y_coord) {
   return y_coord>numberOfRows||y_coord<0;
 }
 
 const actionsAfterGameOver = function () {
   let grid=document.getElementById("keys");
   grid.onkeyup=null;
-  snake=undefined;
-  food=undefined;
   clearInterval(animator);
 }
 
