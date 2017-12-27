@@ -17,6 +17,27 @@ const animateSnake=function() {
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
+  if (isGameOver(snake.getHead())) {
+    console.log("Game Over");
+  }
+}
+
+const isGameOver = function (snake_head) {
+  let snake_head_x_coord=snake_head.getCoord()[0]
+  let snake_head_y_coord=snake_head.getCoord()[1]
+  return isHittingBorder(snake_head_x_coord,snake_head_y_coord);
+}
+
+const isHittingBorder = function (x_coord,y_coord) {
+  return isCollidingHorizontally(x_coord)||isCollidingVertically(y_coord);
+}
+
+const isCollidingHorizontally = function (x_coord) {
+  return x_coord>numberOfCols||x_coord<0;
+}
+
+const isCollidingVertically = function (y_coord) {
+  return y_coord>numberOfRows||y_coord<0;
 }
 
 const changeSnakeDirection=function(event) {
