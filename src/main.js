@@ -43,11 +43,11 @@ const isHitBorder = function (x_coord,y_coord) {
 }
 
 const isCollidedHorizontally = function (x_coord) {
-  return x_coord>numberOfCols||x_coord<0;
+  return x_coord>=numberOfCols||x_coord<0;
 }
 
 const isCollidedVertically = function (y_coord) {
-  return y_coord>numberOfRows||y_coord<0;
+  return y_coord>=numberOfRows||y_coord<0;
 }
 
 const actionsAfterGameOver = function () {
