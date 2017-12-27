@@ -9,6 +9,10 @@ const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
+  if (isGameOver(snake)) {
+    actionsAfterGameOver();
+    return ;
+  }
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
@@ -16,9 +20,6 @@ const animateSnake=function() {
     snake.grow();
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
-  }
-  if (isGameOver(snake)) {
-    actionsAfterGameOver();
   }
 }
 
@@ -42,11 +43,11 @@ const isHitBorder = function (x_coord,y_coord) {
 }
 
 const isCollidedHorizontally = function (x_coord) {
-  return x_coord>=numberOfCols||x_coord<=0;
+  return x_coord>numberOfCols||x_coord<0;
 }
 
 const isCollidedVertically = function (y_coord) {
-  return y_coord>=numberOfRows||y_coord<=0;
+  return y_coord>numberOfRows||y_coord<0;
 }
 
 const actionsAfterGameOver = function () {
