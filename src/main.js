@@ -18,7 +18,7 @@ const animateSnake=function() {
     drawFood(food);
   }
   if (isGameOver(snake.getHead())) {
-    console.log("Game Over");
+    actionsAfterGameOver();
   }
 }
 
@@ -38,6 +38,14 @@ const isCollidingHorizontally = function (x_coord) {
 
 const isCollidingVertically = function (y_coord) {
   return y_coord>numberOfRows||y_coord<0;
+}
+
+const actionsAfterGameOver = function () {
+  let grid=document.getElementById("keys");
+  grid.onkeyup=null;
+  snake=undefined;
+  food=undefined;
+  clearInterval(animator);
 }
 
 const changeSnakeDirection=function(event) {
