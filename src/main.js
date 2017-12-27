@@ -53,35 +53,28 @@ const actionsAfterGameOver = function () {
   let grid=document.getElementById("keys");
   grid.onkeyup=null;
   clearInterval(animator);
-  displayGameOver();
-  giveChanceToRestart();
+  showHiddenTail()
 }
+
+const showHiddenTail = function () {
+  let hidden_tail=document.getElementById("hidden_tail");
+  hidden_tail.style.visibility="visible";
+}
+
+const hideHiddenTailAgain = function () {
+  let hidden_tail=document.getElementById("hidden_tail");
+  hidden_tail.style.visibility="hidden";
+}
+
 
 const eraseGrids = function () {
   let grid=document.getElementById("grid");
   grid.innerHTML=null;
 }
 
-const displayGameOver = function () {
-  let message_box=document.getElementById("message_box");
-  message_box.innerText="Game Over";
-};
-
-const eraseGameOverMessage = function () {
-  let message_box=document.getElementById("message_box");
-  message_box.innerText="";
-}
-
-const giveChanceToRestart = function () {
-  let restart=document.getElementById("restart_game");
-  restart.onclick=restartGame;
-  restart.style.visibility="visible";
-}
-
 const restartGame = function () {
   eraseGrids();
-  hideRestartButton();
-  eraseGameOverMessage();
+  hideHiddenTailAgain();
   startGame();
 }
 

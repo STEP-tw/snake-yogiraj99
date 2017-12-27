@@ -12,10 +12,13 @@
   height: 8px;
 }
 
+#hidden_tail{
+  visibility: hidden;
+}
+
 #restart_game{
   margin-left: 600px;
   font-size: 30px;
-  visibility: hidden;
 }
 
 #message_box{
