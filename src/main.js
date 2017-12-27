@@ -52,7 +52,31 @@ const isCollidedVertically = function (y_coord) {
 const actionsAfterGameOver = function () {
   let grid=document.getElementById("keys");
   grid.onkeyup=null;
+  eraseGrids();
   clearInterval(animator);
+  displayGameOver();
+  giveChanceToRestart();
+}
+
+const eraseGrids = function () {
+  let grid=document.getElementById("grid");
+  grid.innerHTML=null;
+}
+
+const displayGameOver = function () {
+  let message_box=document.getElementById("message_box");
+  message_box.innerText="Game Over";
+};
+
+const displayGameIsGoingOn = function () {
+  let message_box=document.getElementById("message_box");
+  message_box.innerText="Game is Going on";
+}
+
+const giveChanceToRestart = function () {
+  let restart=document.getElementById("restart_game");
+  restart.onclick=startGame;
+  restart.style.visibility="visible";
 }
 
 const changeSnakeDirection=function(event) {
@@ -68,6 +92,12 @@ const changeSnakeDirection=function(event) {
       break;
     default:
   }
+}
+
+const hideRestartButton = function () {
+  let restart=document.getElementById("restart_game");
+  restart.onclick=null;
+  restart.style.visibility="hidden";
 }
 
 const addKeyListener=function() {
@@ -97,6 +127,8 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
+  displayGameIsGoingOn();
+  hideRestartButton();
   animator=setInterval(animateSnake,140);
 }
 

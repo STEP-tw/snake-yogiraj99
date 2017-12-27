@@ -12,6 +12,21 @@
   height: 8px;
 }
 
+#restart_game{
+  float: left;
+  margin-left: 50px;
+  margin-top: 100px;
+  font-size: 30px;
+  /* visibility: hidden; */
+}
+
+#message_box{
+  margin-left: 600px;
+  margin-top:50px;
+  margin-bottom: 50px;
+  font-size: 20px;
+}
+
 .snake {
   background-color: black;
 }
